@@ -102,12 +102,15 @@ export function makeMath(addends: number[]): string {
     if (addends.length === 0) {
         return "0=0";
     }
-    let sum = 0;
-    const findsum = addends.map((end: number): number => (sum = sum + end));
+    const sum = addends.reduce(
+        (currentTotal: number, num: number) => currentTotal + num,
+        0
+    );
     let str = sum.toString() + "=";
     const createstr = addends.map(
         (end: number): string => (str = str + end.toString() + "+")
     );
+    createstr;
     return str.substring(0, str.length - 1);
 }
 
