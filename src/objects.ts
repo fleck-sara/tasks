@@ -1,3 +1,5 @@
+import { type } from "os";
+import { stringify } from "querystring";
 import { Question, QuestionType } from "./interfaces/question";
 
 /**
@@ -10,7 +12,17 @@ export function makeBlankQuestion(
     name: string,
     type: QuestionType
 ): Question {
-    return {};
+    const blankq: Question = {
+        id: id,
+        name: name,
+        body: "",
+        options: [],
+        expected: "",
+        points: 1,
+        published: false,
+        type: type
+    };
+    return blankq;
 }
 
 /**
@@ -21,7 +33,11 @@ export function makeBlankQuestion(
  * HINT: Look up the `trim` and `toLowerCase` functions.
  */
 export function isCorrect(question: Question, answer: string): boolean {
-    return false;
+    const q: string = question.expected.toLowerCase();
+    const q_trimmed: string = q.trim();
+    const ans: string = answer.toLowerCase();
+    const ans_trimmed: string = ans.trim();
+    return q_trimmed === ans_trimmed;
 }
 
 /**
@@ -31,7 +47,16 @@ export function isCorrect(question: Question, answer: string): boolean {
  * be exactly one of the options.
  */
 export function isValid(question: Question, answer: string): boolean {
-    return false;
+    if (question.type === "multiple_choice_question") {
+        const index: number = question.options.findIndex(
+            (option: string): boolean => option === answer
+        );
+        if (index >= 0) {
+            return true;
+        }
+        return false;
+    }
+    return true;
 }
 
 /**
