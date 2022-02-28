@@ -290,11 +290,14 @@ export function duplicateQuestionInArray(
     targetId: number,
     newId: number
 ): Question[] {
-    const dupq = questions.find((q: Question): boolean => q.id === targetId);
     const i = questions.findIndex((q: Question): boolean => q.id === targetId);
     const dupquestions = [...questions];
     if (i >= 0) {
-        const newq = duplicateQuestion(newId, dupq);
+        const dupq = questions.find(
+            (q: Question): boolean => q.id === targetId
+        );
+        const dupq2 = { ...dupq };
+        const newq = duplicateQuestion(newId, dupq2);
         dupquestions.splice(i + 1, 0, newq);
     }
     return dupquestions;
