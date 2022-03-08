@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
-//import { dhValue, setDhValue } from "./DoubleHalfState";
 import { doubleProps } from "./DoubleHalfState";
 
 function Doubler({ setDhValue, dhValue }: doubleProps): JSX.Element {
