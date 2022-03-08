@@ -22,7 +22,7 @@ function App(): JSX.Element {
             <hr></hr>
             <ChooseTeam></ChooseTeam>
             <hr></hr>
-            <ColoredBox></ColoredBox>
+            {<ColoredBox></ColoredBox>}
             <hr></hr>
             <ShoveBox></ShoveBox>
             <hr></hr>
