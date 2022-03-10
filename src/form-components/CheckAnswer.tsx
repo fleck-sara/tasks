@@ -23,14 +23,14 @@ export function CheckAnswer({
     return (
         <>
             <div>
+                <h3>Check Answer</h3>
+            </div>
+            <div>
                 <Form.Group controlId="formCheckAnswer">
                     <Form.Label>What is your answer?</Form.Label>
                     <Form.Control value={answer} onChange={updateAnswer} />
                 </Form.Group>
                 <div>{isCorrect(answer)}</div>
-            </div>
-            <div>
-                <h3>Check Answer</h3>
             </div>
         </>
     );
