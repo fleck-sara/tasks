@@ -1,5 +1,4 @@
-{
-    "BLANK_QUESTIONS": [
+[
         {
             "id": 1,
             "name": "Question 1",
@@ -29,9 +28,7 @@
             "expected": "",
             "points": 1,
             "published": false
-        }
-    ],
-    "SIMPLE_QUESTIONS": [
+        },
         {
             "id": 1,
             "name": "Addition",
@@ -71,9 +68,7 @@
             "expected": "circle",
             "points": 2,
             "published": false
-        }
-    ],
-    "TRIVIA_QUESTIONS": [
+        },
         {
             "id": 1,
             "name": "Mascot",
@@ -111,9 +106,7 @@
             "expected": "Two",
             "points": 10,
             "published": false
-        }
-    ],
-    "EMPTY_QUESTIONS": [
+        },
         {
             "id": 1,
             "name": "Empty 1",
@@ -163,9 +156,7 @@
             "expected": "",
             "points": 5,
             "published": false
-        }
-    ],
-    "SIMPLE_QUESTIONS_2": [
+        },
         {
             "id": 478,
             "name": "Students",
@@ -217,4 +208,3 @@
             "published": true
         }
     ]
-}
