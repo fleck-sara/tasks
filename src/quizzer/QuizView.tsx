@@ -7,7 +7,7 @@ export function QuizView({ quiz }: { quiz: Quiz }): JSX.Element {
         <Container>
             <Row>
                 <Col>
-                    <h3>This is the title of the quiz: {quiz.title}</h3>
+                    <h3>Title: {quiz.title}</h3>
                     <i>Description: {quiz.description}</i>
                 </Col>
             </Row>

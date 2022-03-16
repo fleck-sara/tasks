@@ -7,8 +7,8 @@ import { QuizList } from "./quizzer/QuizList";
 const QUIZ: Quiz[] = [
     {
         id: "First-quiz",
-        title: "this is the title",
-        description: "this is the description",
+        title: "first quiz",
+        description: "this is a quiz about goats at UD",
         questions: [
             {
                 id: 3,
@@ -43,11 +43,16 @@ function App(): JSX.Element {
                 <img src={pic} />
             </div>
             <div className="App">
-                <span>Completed Features: sketch</span>
+                <span>
+                    Completed Features: sketch, quizzes (1 sample) viewable,
+                    clicking shows questions (1 sample)
+                </span>
             </div>
+            <hr></hr>
             <div>
                 <QuizList quizzes={QUIZ}></QuizList>
             </div>
+            <hr></hr>
         </div>
     );
 }
