@@ -9,7 +9,7 @@ PASS src/App.test.tsx
 -------------------|---------|----------|---------|---------|-------------------
 File               | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
 -------------------|---------|----------|---------|---------|-------------------
-All files          |   41.26 |       50 |   41.17 |   40.51 |                   
+All files          |   39.54 |    48.52 |   37.63 |   38.75 |                   
  src               |   41.23 |    51.66 |   41.33 |   40.43 |                   
   App.tsx          |     100 |      100 |     100 |     100 |                   
   arrays.ts        |     100 |      100 |     100 |     100 |                   
@@ -20,16 +20,17 @@ All files          |   41.26 |       50 |   41.17 |   40.51 |
   answer.ts        |       0 |        0 |       0 |       0 |                   
   question.ts      |       0 |        0 |       0 |       0 |                   
   quiz.ts          |       0 |        0 |       0 |       0 |                   
- src/quizzer       |   41.66 |       25 |      40 |   41.66 |                   
+ src/quizzer       |   26.92 |       25 |   22.22 |   26.92 |                   
   QuestionList.tsx |       0 |      100 |       0 |       0 | 13-16             
   QuestionView.tsx |       0 |        0 |       0 |       0 | 10-26             
   QuizList.tsx     |      75 |       50 |   66.66 |      75 | 11                
-  QuizView.tsx     |     100 |      100 |     100 |     100 |                   
+  QuizView.tsx     |      50 |       50 |      25 |      50 | 11,17-44          
   Quizzer.tsx      |     100 |      100 |     100 |     100 |                   
+  TakeQuiz.tsx     |       0 |        0 |       0 |       0 | 15-41             
 -------------------|---------|----------|---------|---------|-------------------
 
 Test Suites: 4 passed, 4 total
 Tests:       16 passed, 16 total
 Snapshots:   0 total
-Time:        3.361 s
+Time:        3.554 s
 Ran all test suites.
