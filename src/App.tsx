@@ -24,8 +24,7 @@ const QUIZ: Quiz[] = [
                 points: 10,
                 published: true
             }
-        ],
-        published: true
+        ]
     }
 ];
 
@@ -45,7 +44,8 @@ function App(): JSX.Element {
             <div className="App">
                 <span>
                     Completed Features: sketch, quizzes (1 sample) viewable,
-                    clicking shows questions (1 sample)
+                    clicking shows questions (1 sample), a Take Quiz button
+                    appears, but its implementation does not work yet
                 </span>
             </div>
             <hr></hr>
