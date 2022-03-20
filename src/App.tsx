@@ -115,8 +115,9 @@ function App(): JSX.Element {
             </div>
             <div className="App">
                 <span>
-                    Completed Features: sketch, quizzes viewable, clicking shows
-                    questions, can take quizzes
+                    Completed Features: sketch, quizzes are visible, quizzes
+                    have questions (short answer and multiple choice), check
+                    correctness
                 </span>
             </div>
             <hr></hr>
