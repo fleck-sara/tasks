@@ -6,9 +6,13 @@ type ChangeEvent = React.ChangeEvent<
 >;
 
 export function Takequiz({
+    title,
     options,
+    type,
     expectedanswer
 }: {
+    type: string;
+    title: string;
     options: string[];
     expectedanswer: string;
 }): JSX.Element {
@@ -25,34 +29,34 @@ export function Takequiz({
             return "❌";
         }
     }
+    const isMultipleChoice = type === "multiple_choice_question";
+
     function updateanswer(event: ChangeEvent) {
         setanswer(event.target.value);
     }
-    return (
+    return isMultipleChoice ? (
+        <div>
+            <Form.Group controlId="Multiple Choice">
+                <Form.Label>{title}</Form.Label>
+                <Form.Select value={choice} onChange={updatechoice}>
+                    {options.map((o: string) => (
+                        <option key={o} value={o}>
+                            {o}
+                        </option>
+                    ))}
+                </Form.Select>
+            </Form.Group>
+            <div>{isCorrect(choice)}</div>
+        </div>
+    ) : (
         <>
             <div>
-                <h6>Multiple Choice Question</h6>
-            </div>
-            <div>
-                <Form.Group controlId="Multiple Choice">
-                    <Form.Label>What is the answer?</Form.Label>
-                    <Form.Select value={choice} onChange={updatechoice}>
-                        {options.map((o: string) => (
-                            <option key={o} value={o}>
-                                {o}
-                            </option>
-                        ))}
-                    </Form.Select>
+                <Form.Group controlId="form-open-endedquestion">
+                    <Form.Label>{title}</Form.Label>
+                    <Form.Control value={answer} onChange={updateanswer} />
                 </Form.Group>
-                <div>{isCorrect(choice)}</div>
-                <h6>Open Ended Question</h6>
-                <div>
-                    <Form.Group controlId="form-open-endedquestion">
-                        <Form.Label>Answer: </Form.Label>
-                        <Form.Control value={answer} onChange={updateanswer} />
-                    </Form.Group>
-                </div>
             </div>
+            <div>{isCorrect(answer)}</div>
         </>
     );
 }
