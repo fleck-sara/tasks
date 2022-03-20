@@ -7,21 +7,93 @@ import { QuizList } from "./quizzer/QuizList";
 const QUIZ: Quiz[] = [
     {
         id: "First-quiz",
-        title: "first quiz",
-        description: "this is a quiz about goats at UD",
+        title: "Quiz about the developer",
+        description: "this is a quiz about the coder of this quizzer :)",
         questions: [
             {
+                id: 1,
+                name: "place of residence",
+                body: "What state is this developer from?",
+                type: "multiple_choice_question",
+                options: ["", "DE", "MD", "PA", "NY"],
+                expected: "PA",
+                points: 2,
+                published: true
+            },
+            {
+                id: 2,
+                name: "hobbies",
+                body: "what is a hobby this CISC student likes to do?",
+                type: "short_answer_question",
+                options: [],
+                expected: "swimming",
+                points: 5,
+                published: true
+            },
+            {
                 id: 3,
-                name: "Goats",
-                body: "How many goats are there usually on the Green?",
+                name: "favorite pet",
+                body: "what is this CISC student's favorite type of pet?",
                 type: "multiple_choice_question",
                 options: [
-                    "Zero, why would there be goats on the green?",
-                    "18420",
-                    "Two"
+                    "",
+                    "cats",
+                    "giraffes",
+                    "hamsters",
+                    "guinea pigs",
+                    "dogs"
                 ],
-                expected: "Two",
-                points: 10,
+                expected: "dogs",
+                points: 2,
+                published: true
+            }
+        ]
+    },
+    {
+        id: "Second-quiz",
+        title: "Trivia",
+        description: "This is a trivia quiz about UD",
+        questions: [
+            {
+                id: 1,
+                name: "Mascot",
+                body: "What is the UD mascot?",
+                type: "multiple_choice_question",
+                options: [
+                    "",
+                    "YouDee, a blue hen",
+                    "a blue chicken name blue",
+                    "the blue wave",
+                    "YouDee, a blue goat"
+                ],
+                expected: "YouDee, a blue hen",
+                points: 2,
+                published: true
+            },
+            {
+                id: 2,
+                name: "Year founded",
+                body: "What year was UD founded?",
+                type: "short_answer_question",
+                options: [],
+                expected: "1743",
+                points: 5,
+                published: true
+            },
+            {
+                id: 3,
+                name: "UD colors?",
+                body: "What are UD's colors?",
+                type: "multiple_choice_question",
+                options: [
+                    "",
+                    "red and yellow",
+                    "blue and yellow",
+                    "blue and white",
+                    "black and yellow"
+                ],
+                expected: "blue and yellow",
+                points: 2,
                 published: true
             }
         ]
@@ -43,9 +115,8 @@ function App(): JSX.Element {
             </div>
             <div className="App">
                 <span>
-                    Completed Features: sketch, quizzes (1 sample) viewable,
-                    clicking shows questions (1 sample), a Take Quiz button
-                    appears, but its implementation does not work yet
+                    Completed Features: sketch, quizzes viewable, clicking shows
+                    questions, can take quizzes
                 </span>
             </div>
             <hr></hr>

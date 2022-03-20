@@ -16,11 +16,22 @@ export function QuizView({ quiz }: { quiz: Quiz }): JSX.Element {
             {questions.map((question: Question) => (
                 <div key={question.id}>
                     <Takequiz
+                        type={question.type}
+                        title={question.body}
                         options={question.options}
                         expectedanswer={question.expected}
                     ></Takequiz>
                 </div>
             ))}
+            <Button
+                className="float-right me-3"
+                size="sm"
+                variant="success"
+                onClick={() => changetakequiz()}
+            >
+                Return
+            </Button>
+            <hr></hr>
         </div>
     ) : (
         <Container>
@@ -43,8 +54,13 @@ export function QuizView({ quiz }: { quiz: Quiz }): JSX.Element {
                         variant="success"
                         onClick={() => changetakequiz()}
                     >
-                        Take Quiz
+                        Take/View Quiz
                     </Button>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <hr></hr>
                 </Col>
             </Row>
         </Container>
