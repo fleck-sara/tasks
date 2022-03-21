@@ -10,16 +10,9 @@ export function QuestionList({
     questions: Question[];
     changeView: () => void;
 }): JSX.Element {
-    function getPublishedQuestions(questions: Question[]): Question[] {
-        const publishedQs = questions.filter(
-            (q: Question): boolean => q.published
-        );
-        return publishedQs;
-    }
-    const publishedQs = getPublishedQuestions(questions);
     return (
         <Stack gap={3} onClick={changeView}>
-            {publishedQs.map((question: Question) => (
+            {questions.map((question: Question) => (
                 <div key={question.id}>
                     <QuestionView question={question}></QuestionView>
                 </div>

@@ -27,7 +27,11 @@ export function Takequiz({
         setchoice(event.target.value);
     }
     function isCorrect(answer: string): string {
-        if (answer === expectedanswer) {
+        const q: string = expectedanswer.toLowerCase();
+        const q_trimmed: string = q.trim();
+        const ans: string = answer.toLowerCase();
+        const ans_trimmed: string = ans.trim();
+        if (q_trimmed === ans_trimmed) {
             return "✔️";
         } else {
             return "❌";

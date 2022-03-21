@@ -4,7 +4,7 @@ import { Quiz } from "../interfaces/quiz";
 import { useState } from "react";
 import { Takequiz } from "./TakeQuiz";
 import { Question } from "../interfaces/question";
-import { EditQuiz } from "./EditQuiz";
+import { EditQuestion } from "./EditQuestion";
 
 export function QuizView({ quiz }: { quiz: Quiz }): JSX.Element {
     const [takequiz, settakequiz] = useState<boolean>(false);
@@ -16,14 +16,20 @@ export function QuizView({ quiz }: { quiz: Quiz }): JSX.Element {
     function changetakequiz() {
         settakequiz(!takequiz);
     }
+    function getPublishedQuestions(questions: Question[]): Question[] {
+        const publishedQs = questions.filter(
+            (q: Question): boolean => q.published
+        );
+        return publishedQs;
+    }
     function editquiz() {
         if (edit) {
             return questions.map((question: Question) => (
                 <div key={question.id}>
-                    <EditQuiz
+                    <EditQuestion
                         question={question}
                         changeEditing={changeedit}
-                    ></EditQuiz>
+                    ></EditQuestion>
                 </div>
             ));
         }
@@ -31,7 +37,7 @@ export function QuizView({ quiz }: { quiz: Quiz }): JSX.Element {
     }
     return takequiz ? (
         <div>
-            {questions.map((question: Question) => (
+            {getPublishedQuestions(questions).map((question: Question) => (
                 <div key={question.id}>
                     <Takequiz
                         type={question.type}

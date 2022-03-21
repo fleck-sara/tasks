@@ -6,7 +6,7 @@ import { Button, Form } from "react-bootstrap";
 type ChangeEvent = React.ChangeEvent<
     HTMLTextAreaElement | HTMLInputElement | HTMLSelectElement
 >;
-export function EditQuiz({
+export function EditQuestion({
     question,
     changeEditing
 }: {
@@ -38,10 +38,18 @@ export function EditQuiz({
         question.body = body;
         question.points = points;
         question.name = name;
+        question.published = published;
         changeEditing();
     }
     function cancel() {
         changeEditing();
+    }
+    function isPublished(): string {
+        if (published) {
+            return "this question is currently published";
+        } else {
+            return "this question is currently unpublished";
+        }
     }
     return (
         <div>
@@ -56,6 +64,7 @@ export function EditQuiz({
             <Form.Group controlId="formEditQuestionPoints">
                 <Form.Label>Points: (Enter an Integer)</Form.Label>
                 <Form.Control value={points} onChange={updatePoints} />
+                <Form.Label>{isPublished()}</Form.Label>
             </Form.Group>
             <Button onClick={updatepublished} size="sm" className="me-4">
                 publish/unpublish
