@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form } from "react-bootstrap";
+import { Container, Row, Col, Form } from "react-bootstrap";
 
 type ChangeEvent = React.ChangeEvent<
     HTMLTextAreaElement | HTMLInputElement | HTMLSelectElement
@@ -27,7 +27,11 @@ export function Takequiz({
         setchoice(event.target.value);
     }
     function isCorrect(answer: string): string {
-        if (answer === expectedanswer) {
+        const q: string = expectedanswer.toLowerCase();
+        const q_trimmed: string = q.trim();
+        const ans: string = answer.toLowerCase();
+        const ans_trimmed: string = ans.trim();
+        if (q_trimmed === ans_trimmed) {
             return "✔️";
         } else {
             return "❌";
@@ -40,29 +44,54 @@ export function Takequiz({
     }
     return isMultipleChoice ? (
         <div>
-            <Form.Group controlId="Multiple Choice">
-                <Form.Label> Title: {name} </Form.Label>
-                <Form.Label> Question: {body} </Form.Label>
-                <Form.Label> points: {points} </Form.Label>
-                <Form.Select value={choice} onChange={updatechoice}>
-                    {options.map((o: string) => (
-                        <option key={o} value={o}>
-                            {o}
-                        </option>
-                    ))}
-                </Form.Select>
-            </Form.Group>
-            <div>{isCorrect(choice)}</div>
+            <Container>
+                <Row>
+                    <Form.Group controlId="Multiple Choice">
+                        <Col>
+                            <Form.Label> Title: {name} </Form.Label>
+                        </Col>
+                        <Col>
+                            <Form.Label> Question: {body} </Form.Label>
+                        </Col>
+                        <Col>
+                            <Form.Label> points: {points} </Form.Label>
+                        </Col>
+                        <Col>
+                            <Form.Select value={choice} onChange={updatechoice}>
+                                {options.map((o: string) => (
+                                    <option key={o} value={o}>
+                                        {o}
+                                    </option>
+                                ))}
+                            </Form.Select>
+                        </Col>
+                    </Form.Group>
+                </Row>
+                <div>{isCorrect(choice)}</div>
+            </Container>
         </div>
     ) : (
         <>
-            <div>
-                <Form.Group controlId="form-open-endedquestion">
-                    <Form.Label>{name}</Form.Label>
-                    <Form.Control value={answer} onChange={updateanswer} />
-                </Form.Group>
-            </div>
-            <div>{isCorrect(answer)}</div>
+            <Container>
+                <Row>
+                    <Form.Group controlId="form-open-endedquestion">
+                        <Col>
+                            <Form.Label>Title: {name}</Form.Label>
+                        </Col>
+                        <Col>
+                            <Form.Label> Question: {body} </Form.Label>
+                        </Col>
+                        <Col>
+                            <Form.Label> points: {points} </Form.Label>
+                        </Col>
+                        <Form.Control
+                            value={answer}
+                            onChange={updateanswer}
+                        ></Form.Control>
+                    </Form.Group>
+                </Row>
+                <div>{isCorrect(answer)}</div>
+            </Container>
         </>
     );
 }

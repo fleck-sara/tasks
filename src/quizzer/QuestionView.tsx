@@ -15,7 +15,13 @@ export function QuestionView({
             <Row>
                 <Col>
                     <h4>Title: {question.name}</h4>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
                     <h6>{question.body} </h6>
+                </Col>
+                <Col>
                     <i>Points: {question.points}</i>
                 </Col>
             </Row>

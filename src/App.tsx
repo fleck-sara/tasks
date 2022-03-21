@@ -4,6 +4,7 @@ import { Quizzer } from "./quizzer/Quizzer";
 import pic from "./quizzer/sketch.png";
 import { Quiz } from "./interfaces/quiz";
 import { QuizList } from "./quizzer/QuizList";
+
 const QUIZ: Quiz[] = [
     {
         id: "First-quiz",
@@ -117,7 +118,8 @@ function App(): JSX.Element {
                 <span>
                     Completed Features: sketch, quizzes are visible, quizzes
                     have questions (short answer and multiple choice), check
-                    correctness, can edit body and point value of a question
+                    correctness, can edit name, body, options, and point value
+                    of questions. Can also publish/unpublish questions
                 </span>
             </div>
             <hr></hr>
