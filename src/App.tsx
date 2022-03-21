@@ -4,6 +4,7 @@ import { Quizzer } from "./quizzer/Quizzer";
 import pic from "./quizzer/sketch.png";
 import { Quiz } from "./interfaces/quiz";
 import { QuizList } from "./quizzer/QuizList";
+
 const QUIZ: Quiz[] = [
     {
         id: "First-quiz",

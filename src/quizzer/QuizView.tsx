@@ -20,7 +20,10 @@ export function QuizView({ quiz }: { quiz: Quiz }): JSX.Element {
         if (edit) {
             return questions.map((question: Question) => (
                 <div key={question.id}>
-                    <EditQuiz question={question}></EditQuiz>
+                    <EditQuiz
+                        question={question}
+                        changeEditing={changeedit}
+                    ></EditQuiz>
                 </div>
             ));
         }
