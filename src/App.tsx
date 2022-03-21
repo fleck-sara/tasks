@@ -117,7 +117,7 @@ function App(): JSX.Element {
                 <span>
                     Completed Features: sketch, quizzes are visible, quizzes
                     have questions (short answer and multiple choice), check
-                    correctness
+                    correctness, can edit body and point value of a question
                 </span>
             </div>
             <hr></hr>
