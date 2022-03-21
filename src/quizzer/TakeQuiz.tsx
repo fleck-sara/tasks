@@ -6,13 +6,17 @@ type ChangeEvent = React.ChangeEvent<
 >;
 
 export function Takequiz({
-    title,
+    name,
+    body,
+    points,
     options,
     type,
     expectedanswer
 }: {
+    name: string;
     type: string;
-    title: string;
+    body: string;
+    points: number;
     options: string[];
     expectedanswer: string;
 }): JSX.Element {
@@ -37,7 +41,9 @@ export function Takequiz({
     return isMultipleChoice ? (
         <div>
             <Form.Group controlId="Multiple Choice">
-                <Form.Label>{title}</Form.Label>
+                <Form.Label> Title: {name} </Form.Label>
+                <Form.Label> Question: {body} </Form.Label>
+                <Form.Label> points: {points} </Form.Label>
                 <Form.Select value={choice} onChange={updatechoice}>
                     {options.map((o: string) => (
                         <option key={o} value={o}>
@@ -52,7 +58,7 @@ export function Takequiz({
         <>
             <div>
                 <Form.Group controlId="form-open-endedquestion">
-                    <Form.Label>{title}</Form.Label>
+                    <Form.Label>{name}</Form.Label>
                     <Form.Control value={answer} onChange={updateanswer} />
                 </Form.Group>
             </div>

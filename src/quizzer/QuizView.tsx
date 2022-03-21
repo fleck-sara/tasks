@@ -4,20 +4,37 @@ import { Quiz } from "../interfaces/quiz";
 import { useState } from "react";
 import { Takequiz } from "./TakeQuiz";
 import { Question } from "../interfaces/question";
+import { EditQuiz } from "./EditQuiz";
 
 export function QuizView({ quiz }: { quiz: Quiz }): JSX.Element {
     const [takequiz, settakequiz] = useState<boolean>(false);
+    const [edit, setedit] = useState<boolean>(false);
+    const questions: Question[] = quiz.questions;
+    function changeedit() {
+        setedit(!edit);
+    }
     function changetakequiz() {
         settakequiz(!takequiz);
     }
-    const questions: Question[] = quiz.questions;
+    function editquiz() {
+        if (edit) {
+            return questions.map((question: Question) => (
+                <div key={question.id}>
+                    <EditQuiz question={question}></EditQuiz>
+                </div>
+            ));
+        }
+        return null;
+    }
     return takequiz ? (
         <div>
             {questions.map((question: Question) => (
                 <div key={question.id}>
                     <Takequiz
                         type={question.type}
-                        title={question.body}
+                        name={question.name}
+                        body={question.body}
+                        points={question.points}
                         options={question.options}
                         expectedanswer={question.expected}
                     ></Takequiz>
@@ -51,11 +68,19 @@ export function QuizView({ quiz }: { quiz: Quiz }): JSX.Element {
                     <Button
                         className="float-right me-3"
                         size="sm"
-                        variant="success"
                         onClick={() => changetakequiz()}
                     >
                         Take/View Quiz
                     </Button>
+                    <Button
+                        className="me-3"
+                        size="sm"
+                        variant="success"
+                        onClick={() => changeedit()}
+                    >
+                        Edit Quiz
+                    </Button>
+                    {editquiz()}
                 </Col>
             </Row>
             <Row>
