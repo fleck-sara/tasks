@@ -9,7 +9,7 @@ PASS src/App.test.tsx
 -------------------|---------|----------|---------|---------|-------------------
 File               | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
 -------------------|---------|----------|---------|---------|-------------------
-All files          |   37.55 |    45.83 |   35.64 |   36.72 |                   
+All files          |    32.6 |    44.59 |   31.57 |   31.67 |                   
  src               |   41.23 |    51.66 |   41.33 |   40.43 |                   
   App.tsx          |     100 |      100 |     100 |     100 |                   
   arrays.ts        |     100 |      100 |     100 |     100 |                   
@@ -20,18 +20,18 @@ All files          |   37.55 |    45.83 |   35.64 |   36.72 |
   answer.ts        |       0 |        0 |       0 |       0 |                   
   question.ts      |       0 |        0 |       0 |       0 |                   
   quiz.ts          |       0 |        0 |       0 |       0 |                   
- src/quizzer       |   20.93 |    16.66 |   19.23 |   20.93 |                   
-  EditQuiz.tsx     |       0 |        0 |       0 |       0 | 10-27             
+ src/quizzer       |   11.39 |    14.28 |   12.82 |   11.39 |                   
+  EditQuestion.tsx |       0 |        0 |       0 |       0 | 16-93             
   QuestionList.tsx |       0 |      100 |       0 |       0 | 13-16             
-  QuestionView.tsx |       0 |        0 |       0 |       0 | 10-26             
+  QuestionView.tsx |       0 |        0 |       0 |       0 | 10-32             
   QuizList.tsx     |     100 |      100 |     100 |     100 |                   
-  QuizView.tsx     |   42.85 |       50 |   22.22 |   42.85 | 14-17,21-22,32-79 
+  QuizView.tsx     |   35.29 |       50 |   18.18 |   35.29 | 14-23,27-28,41-88 
   Quizzer.tsx      |     100 |      100 |     100 |     100 |                   
-  TakeQuiz.tsx     |       0 |        0 |       0 |       0 | 23-49             
+  TakeQuiz.tsx     |       0 |        0 |       0 |       0 | 23-62             
 -------------------|---------|----------|---------|---------|-------------------
 
 Test Suites: 4 passed, 4 total
 Tests:       16 passed, 16 total
 Snapshots:   0 total
-Time:        3.854 s
+Time:        3.831 s
 Ran all test suites.
