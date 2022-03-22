@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-//import { Quiz } from "../interfaces/quiz";
 import { Question } from "../interfaces/question";
 import { Button, Form } from "react-bootstrap";
 
