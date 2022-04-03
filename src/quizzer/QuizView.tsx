@@ -51,6 +51,12 @@ export function QuizView({ quiz }: { quiz: Quiz }): JSX.Element {
     function updatetitle(event: ChangeEvent) {
         settitle(event.target.value);
     }
+    function deletequestionbyid(qID: number) {
+        const qs = [...q].filter(
+            (questions: Question): boolean => questions.id != qID
+        );
+        setquestions(qs);
+    }
     function editquestions() {
         if (edit) {
             return q.map((question: Question) => (
@@ -59,6 +65,13 @@ export function QuizView({ quiz }: { quiz: Quiz }): JSX.Element {
                         question={question}
                         changeEditing={changeedit}
                     ></EditQuestion>
+                    <Button
+                        className="me-3"
+                        variant="danger"
+                        onClick={() => deletequestionbyid(question.id)}
+                    >
+                        delete question
+                    </Button>
                 </div>
             ));
         }

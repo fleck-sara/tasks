@@ -149,7 +149,8 @@ export function App(): JSX.Element {
                     have questions (short answer and multiple choice), check
                     correctness, can edit questions, publish/unpublish
                     questions. Can edit the fields of a quiz, and add new
-                    quizzes. Can add new questions. All features have tests.
+                    quizzes. Can add and delete questions. All features have
+                    tests.
                 </span>
             </div>
             <hr></hr>

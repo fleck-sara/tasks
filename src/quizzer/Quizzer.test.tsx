@@ -128,4 +128,17 @@ describe("Quizzer Tests", () => {
             screen.queryByText(/Title: enter question title here/i)
         ).toBeInTheDocument();
     });
+    test("Delete Questions", () => {
+        const questions = screen.queryAllByText("Edit Questions");
+        questions[0].click();
+        const deletequestion = screen.queryAllByText("delete question");
+        deletequestion[0].click();
+        const savebtns = screen.queryAllByTestId("save");
+        savebtns[0].click();
+        const q = screen.queryAllByText("Take/View Quiz");
+        q[0].click();
+        expect(
+            screen.queryByText(/Title: place of residence/i)
+        ).not.toBeInTheDocument();
+    });
 });
