@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import { Quiz } from "../interfaces/quiz";
 import { useState } from "react";
 import { Takequiz } from "./TakeQuiz";
@@ -7,29 +7,53 @@ import { Question } from "../interfaces/question";
 import { EditQuestion } from "./EditQuestion";
 import { EditQuiz } from "./EditQuiz";
 
+type ChangeEvent = React.ChangeEvent<
+    HTMLTextAreaElement | HTMLInputElement | HTMLSelectElement
+>;
+
 export function QuizView({ quiz }: { quiz: Quiz }): JSX.Element {
     const [takequiz, settakequiz] = useState<boolean>(false);
     const [edit, setedit] = useState<boolean>(false);
     const [editquiz, seteditquiz] = useState<boolean>(false);
+    const [title, settitle] = useState<string>("enter question title here");
+    const questions: Question[] = quiz.questions;
+    const [q, setquestions] = useState<Question[]>(questions);
+
+    function addQuestion() {
+        const newQuestion: Question = {
+            id: Math.floor(Math.random() * 50),
+            name: title,
+            body: "",
+            type: "short_answer_question",
+            options: [],
+            expected: "",
+            points: 0,
+            published: true
+        };
+        const newquestionlist = [...q, newQuestion];
+        setquestions(newquestionlist);
+    }
+
     function changeeditquiz() {
         seteditquiz(!editquiz);
     }
-    const questions: Question[] = quiz.questions;
+
     function changeedit() {
         setedit(!edit);
     }
     function changetakequiz() {
         settakequiz(!takequiz);
     }
-    function getPublishedQuestions(questions: Question[]): Question[] {
-        const publishedQs = questions.filter(
-            (q: Question): boolean => q.published
-        );
+    function getPublishedQuestions(): Question[] {
+        const publishedQs = q.filter((qs: Question): boolean => qs.published);
         return publishedQs;
+    }
+    function updatetitle(event: ChangeEvent) {
+        settitle(event.target.value);
     }
     function editquestions() {
         if (edit) {
-            return questions.map((question: Question) => (
+            return q.map((question: Question) => (
                 <div key={question.id}>
                     <EditQuestion
                         question={question}
@@ -37,6 +61,34 @@ export function QuizView({ quiz }: { quiz: Quiz }): JSX.Element {
                     ></EditQuestion>
                 </div>
             ));
+        }
+        return null;
+    }
+    function displayaddq() {
+        if (edit) {
+            return (
+                <>
+                    <div>
+                        <Form.Group controlId="formAddQuestion">
+                            <Form.Label>Name: </Form.Label>
+                            <Form.Control
+                                value={title}
+                                onChange={updatetitle}
+                            />
+                        </Form.Group>
+                    </div>
+                    <div>
+                        <Button
+                            className="me-3"
+                            variant="success"
+                            onClick={() => addQuestion()}
+                        >
+                            Add Question
+                        </Button>
+                    </div>
+                    <hr></hr>
+                </>
+            );
         }
         return null;
     }
@@ -51,9 +103,10 @@ export function QuizView({ quiz }: { quiz: Quiz }): JSX.Element {
         }
         return null;
     }
+    const publishedQs = getPublishedQuestions();
     return takequiz ? (
         <div>
-            {getPublishedQuestions(questions).map((question: Question) => (
+            {publishedQs.map((question: Question) => (
                 <div key={question.id}>
                     <Takequiz
                         type={question.type}
@@ -115,6 +168,7 @@ export function QuizView({ quiz }: { quiz: Quiz }): JSX.Element {
                         Edit Quiz
                     </Button>
                     {editQuiz()}
+                    {displayaddq()}
                 </Col>
             </Row>
             <Row>

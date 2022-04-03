@@ -78,17 +78,13 @@ export function EditQuestion({
         } else {
             type = "short_answer_question";
         }
-        const q: Question = {
-            id: Math.floor(Math.random() * 20),
-            name: name,
-            body: body,
-            type: type,
-            options: options,
-            expected: answer,
-            points: points,
-            published: published
-        };
-        question = q;
+        question.name = name;
+        question.body = body;
+        question.type = type;
+        question.points = points;
+        question.expected = answer;
+        question.options = options;
+        question.published = published;
         changeEditing();
     }
     function cancel() {

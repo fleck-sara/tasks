@@ -50,14 +50,14 @@ describe("Quizzer Tests", () => {
         const q = screen.queryByText(/Title: favorite pet/i);
         expect(q).toBeInTheDocument();
     });
-    test("Check Correctness", () => {
+    test("Quizzes have two types of questions and can check correctness", () => {
         const questions = screen.queryAllByText("Take/View Quiz");
         questions[0].click();
         const textbox = screen.queryAllByRole("textbox");
         userEvent.type(textbox[0], "swimming");
         expect(screen.getByText(/✔️/i)).toBeInTheDocument();
     });
-    test("Check Correctness", () => {
+    test("Quizzes have two types of questions and can check correctness", () => {
         const questions = screen.queryAllByText("Take/View Quiz");
         questions[0].click();
         const textbox = screen.queryAllByRole("textbox");
@@ -71,6 +71,61 @@ describe("Quizzer Tests", () => {
         publish.click();
         expect(
             screen.queryByText(/this question is currently unpublished/i)
+        ).toBeInTheDocument();
+    });
+    test("Edit Questions", () => {
+        const questions = screen.queryAllByText("Edit Questions");
+        questions[0].click();
+        const txtbox = screen.queryAllByRole("textbox");
+        userEvent.type(txtbox[0], "hello");
+        const savebtns = screen.queryAllByTestId("save");
+        savebtns[0].click();
+        const q = screen.queryAllByText("Take/View Quiz");
+        q[0].click();
+        expect(screen.queryByText(/hello/i)).toBeInTheDocument();
+    });
+    test("Edit Questions", () => {
+        const questions = screen.queryAllByText("Edit Questions");
+        questions[0].click();
+        const txtbox = screen.queryAllByRole("textbox");
+        userEvent.type(txtbox[1], "i am editing question");
+        const savebtns = screen.queryAllByTestId("save");
+        savebtns[0].click();
+        const q = screen.queryAllByText("Take/View Quiz");
+        q[0].click();
+        expect(
+            screen.queryByText(/i am editing question/i)
+        ).toBeInTheDocument();
+    });
+    test("Edit Points", () => {
+        const questions = screen.queryAllByText("Edit Questions");
+        questions[0].click();
+        const txtbox = screen.queryAllByRole("textbox");
+        userEvent.type(txtbox[2], "5");
+        const savebtns = screen.queryAllByTestId("save");
+        savebtns[0].click();
+        const q = screen.queryAllByText("Take/View Quiz");
+        q[0].click();
+        expect(screen.queryByText(/points: 5/i)).toBeInTheDocument();
+    });
+    test("Can add quizzes", () => {
+        const addquiz = screen.queryAllByText("Add Quiz");
+        addquiz[0].click();
+        expect(
+            screen.queryByText(/Title: Enter title here/i)
+        ).toBeInTheDocument();
+    });
+    test("Add Questions", () => {
+        const questions = screen.queryAllByText("Edit Questions");
+        questions[0].click();
+        const addquestion = screen.queryAllByText("Add Question");
+        addquestion[0].click();
+        const savebtns = screen.queryAllByTestId("save");
+        savebtns[0].click();
+        const q = screen.queryAllByText("Take/View Quiz");
+        q[0].click();
+        expect(
+            screen.queryByText(/Title: enter question title here/i)
         ).toBeInTheDocument();
     });
 });
