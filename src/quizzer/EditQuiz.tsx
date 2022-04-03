@@ -44,7 +44,13 @@ export function EditQuiz({
                     onChange={updatedescription}
                 />
             </Form.Group>
-            <Button onClick={save} variant="success" size="sm" className="me-4">
+            <Button
+                onClick={save}
+                variant="success"
+                size="sm"
+                className="me-4"
+                data-testid="savequiz"
+            >
                 Save
             </Button>
             <Button

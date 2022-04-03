@@ -3,8 +3,8 @@ import "./App.css";
 import { Quizzer } from "./quizzer/Quizzer";
 import pic from "./quizzer/sketch.png";
 import { Quiz } from "./interfaces/quiz";
-import { QuizList } from "./quizzer/QuizList";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, Stack } from "react-bootstrap";
+import { QuizView } from "./quizzer/QuizView";
 
 type ChangeEvent = React.ChangeEvent<
     HTMLTextAreaElement | HTMLInputElement | HTMLSelectElement
@@ -131,6 +131,31 @@ export function App(): JSX.Element {
     function updatequiz(newquiz: Quiz[]) {
         setquiz(newquiz);
     }
+    function deletequizbyid(qID: string) {
+        const qs = [...quiz].filter((quiz: Quiz): boolean => quiz.id !== qID);
+        setquiz(qs);
+    }
+    function QuizList(quizzes: Quiz[]): JSX.Element {
+        return (
+            <>
+                <Stack gap={3}>
+                    {quizzes.map((q: Quiz) => (
+                        <div key={q.id}>
+                            <QuizView quiz={q}></QuizView>
+                            <Button
+                                className="me-3"
+                                variant="danger"
+                                size="sm"
+                                onClick={() => deletequizbyid(q.id)}
+                            >
+                                delete quiz
+                            </Button>
+                        </div>
+                    ))}
+                </Stack>
+            </>
+        );
+    }
     return (
         <div>
             <div className="App">
@@ -148,15 +173,13 @@ export function App(): JSX.Element {
                     Completed Features: sketch, quizzes are visible, quizzes
                     have questions (short answer and multiple choice), check
                     correctness, can edit questions, publish/unpublish
-                    questions. Can edit the fields of a quiz, and add new
+                    questions. Can edit the fields of a quiz, and add/delete
                     quizzes. Can add and delete questions. All features have
                     tests.
                 </span>
             </div>
             <hr></hr>
-            <div>
-                <QuizList quizzes={quiz}></QuizList>
-            </div>
+            <div>{QuizList(quiz)}</div>
             <div>
                 <Form.Group controlId="formAddQuiz">
                     <Form.Label>Title: </Form.Label>
