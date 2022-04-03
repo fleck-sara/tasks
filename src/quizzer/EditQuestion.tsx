@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Question } from "../interfaces/question";
+import { Question, QuestionType } from "../interfaces/question";
 import { Button, Form } from "react-bootstrap";
 
 type ChangeEvent = React.ChangeEvent<
@@ -72,17 +72,23 @@ export function EditQuestion({
         setoptions(removeoption);
     }
     function save() {
-        question.body = body;
-        question.points = points;
-        question.name = name;
-        question.published = published;
-        question.options = options;
-        question.expected = answer;
+        let type: QuestionType = "multiple_choice_question";
         if (ismultchoice) {
-            question.type = "multiple_choice_question";
+            type = "multiple_choice_question";
         } else {
-            question.type = "short_answer_question";
+            type = "short_answer_question";
         }
+        const q: Question = {
+            id: Math.floor(Math.random() * 20),
+            name: name,
+            body: body,
+            type: type,
+            options: options,
+            expected: answer,
+            points: points,
+            published: published
+        };
+        question = q;
         changeEditing();
     }
     function cancel() {
@@ -97,16 +103,22 @@ export function EditQuestion({
     }
     return ismultchoice ? (
         <div>
-            <Form.Group controlId="formEditQuestionName">
+            <Form.Group
+                controlId="formEditQuestionName"
+                data-testid="edit-name"
+            >
                 <Form.Label> Name: </Form.Label>
                 <Form.Control value={name} onChange={updatename} />
             </Form.Group>
-            <Form.Group controlId="formEditQuestionBody">
+            <Form.Group
+                controlId="formEditQuestionBody"
+                data-testid="edit-body"
+            >
                 <Form.Label>Question: </Form.Label>
                 <Form.Control value={body} onChange={updateBody} />
             </Form.Group>
             {options.map((o: string) => (
-                <div key={""}>
+                <div key={o}>
                     <span>{o}</span>
                 </div>
             ))}
@@ -116,7 +128,10 @@ export function EditQuestion({
                 label="Short Answer?"
                 onChange={updateismultchoice}
             />
-            <Form.Group controlId="formEditQuestionAnswer">
+            <Form.Group
+                controlId="formEditQuestionAnswer"
+                data-testid="edit-answer"
+            >
                 <Form.Label>
                     Question Answer (must be one of the options!):
                 </Form.Label>
@@ -156,7 +171,13 @@ export function EditQuestion({
             <Button onClick={updatepublished} size="sm" className="me-4">
                 publish/unpublish
             </Button>
-            <Button onClick={save} variant="success" size="sm" className="me-4">
+            <Button
+                data-testid="save"
+                onClick={save}
+                variant="success"
+                size="sm"
+                className="me-4"
+            >
                 Save
             </Button>
             <Button
@@ -183,7 +204,12 @@ export function EditQuestion({
                 <Form.Control value={points} onChange={updatePoints} />
                 <Form.Label>{isPublished()}</Form.Label>
             </Form.Group>
-            <Button onClick={updatepublished} size="sm" className="me-4">
+            <Button
+                data-testid="publish/unpublish"
+                onClick={updatepublished}
+                size="sm"
+                className="me-4"
+            >
                 publish/unpublish
             </Button>
             <Form.Check

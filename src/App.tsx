@@ -61,7 +61,7 @@ const QUIZ: Quiz[] = [
         description: "This is a trivia quiz about UD",
         questions: [
             {
-                id: 1,
+                id: 4,
                 name: "Mascot",
                 body: "What is the UD mascot?",
                 type: "multiple_choice_question",
@@ -77,7 +77,7 @@ const QUIZ: Quiz[] = [
                 published: true
             },
             {
-                id: 2,
+                id: 5,
                 name: "Year founded",
                 body: "What year was UD founded?",
                 type: "short_answer_question",
@@ -87,7 +87,7 @@ const QUIZ: Quiz[] = [
                 published: true
             },
             {
-                id: 3,
+                id: 6,
                 name: "UD colors?",
                 body: "What are UD's colors?",
                 type: "multiple_choice_question",
@@ -106,7 +106,7 @@ const QUIZ: Quiz[] = [
     }
 ];
 
-function App(): JSX.Element {
+export function App(): JSX.Element {
     const [quiz, setquiz] = useState<Quiz[]>(QUIZ);
     const [title, settitle] = useState<string>("Enter title here");
     const [description, setdescription] = useState<string>(
