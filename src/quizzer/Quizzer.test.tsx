@@ -97,6 +97,26 @@ describe("Quizzer Tests", () => {
             screen.queryByText(/i am editing question/i)
         ).toBeInTheDocument();
     });
+    test("Edit Quiz title", () => {
+        const questions = screen.queryAllByText("Edit Quiz");
+        questions[0].click();
+        const txtbox = screen.queryAllByRole("textbox");
+        userEvent.type(txtbox[0], "i am editing quiz title");
+        const savebtns = screen.queryAllByTestId("savequiz");
+        savebtns[0].click();
+        expect(
+            screen.queryByText(/i am editing quiz title/i)
+        ).toBeInTheDocument();
+    });
+    test("Edit Quiz description", () => {
+        const questions = screen.queryAllByText("Edit Quiz");
+        questions[0].click();
+        const txtbox = screen.queryAllByRole("textbox");
+        userEvent.type(txtbox[1], "hello");
+        const savebtns = screen.queryAllByTestId("savequiz");
+        savebtns[0].click();
+        expect(screen.queryByText(/hello/i)).toBeInTheDocument();
+    });
     test("Edit Points", () => {
         const questions = screen.queryAllByText("Edit Questions");
         questions[0].click();
@@ -114,6 +134,13 @@ describe("Quizzer Tests", () => {
         expect(
             screen.queryByText(/Title: Enter title here/i)
         ).toBeInTheDocument();
+    });
+    test("Can delete quizzes", () => {
+        const deletequiz = screen.queryAllByText("delete quiz");
+        deletequiz[0].click();
+        expect(
+            screen.queryByText(/Title: Quiz about the developer/i)
+        ).not.toBeInTheDocument();
     });
     test("Add Questions", () => {
         const questions = screen.queryAllByText("Edit Questions");
