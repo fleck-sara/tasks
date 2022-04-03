@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import { Quizzer } from "./quizzer/Quizzer";
 import pic from "./quizzer/sketch.png";
 import { Quiz } from "./interfaces/quiz";
 import { QuizList } from "./quizzer/QuizList";
+import { Button, Form } from "react-bootstrap";
+
+type ChangeEvent = React.ChangeEvent<
+    HTMLTextAreaElement | HTMLInputElement | HTMLSelectElement
+>;
 
 const QUIZ: Quiz[] = [
     {
@@ -56,7 +61,7 @@ const QUIZ: Quiz[] = [
         description: "This is a trivia quiz about UD",
         questions: [
             {
-                id: 1,
+                id: 4,
                 name: "Mascot",
                 body: "What is the UD mascot?",
                 type: "multiple_choice_question",
@@ -72,7 +77,7 @@ const QUIZ: Quiz[] = [
                 published: true
             },
             {
-                id: 2,
+                id: 5,
                 name: "Year founded",
                 body: "What year was UD founded?",
                 type: "short_answer_question",
@@ -82,7 +87,7 @@ const QUIZ: Quiz[] = [
                 published: true
             },
             {
-                id: 3,
+                id: 6,
                 name: "UD colors?",
                 body: "What are UD's colors?",
                 type: "multiple_choice_question",
@@ -101,7 +106,31 @@ const QUIZ: Quiz[] = [
     }
 ];
 
-function App(): JSX.Element {
+export function App(): JSX.Element {
+    const [quiz, setquiz] = useState<Quiz[]>(QUIZ);
+    const [title, settitle] = useState<string>("Enter title here");
+    const [description, setdescription] = useState<string>(
+        "Enter description here"
+    );
+    function updatetitle(event: ChangeEvent) {
+        settitle(event.target.value);
+    }
+    function updatedescription(event: ChangeEvent) {
+        setdescription(event.target.value);
+    }
+    function addQuiz() {
+        const newQuiz = {
+            id: "new-quiz",
+            title: title,
+            description: description,
+            questions: []
+        };
+        const newquizlist = [...quiz, newQuiz];
+        updatequiz(newquizlist);
+    }
+    function updatequiz(newquiz: Quiz[]) {
+        setquiz(newquiz);
+    }
     return (
         <div>
             <div className="App">
@@ -125,7 +154,29 @@ function App(): JSX.Element {
             </div>
             <hr></hr>
             <div>
-                <QuizList quizzes={QUIZ}></QuizList>
+                <QuizList quizzes={quiz}></QuizList>
+            </div>
+            <div>
+                <Form.Group controlId="formAddQuiz">
+                    <Form.Label>Title: </Form.Label>
+                    <Form.Control value={title} onChange={updatetitle} />
+                </Form.Group>
+                <Form.Group controlId="formAddQuestion">
+                    <Form.Label>Description: </Form.Label>
+                    <Form.Control
+                        value={description}
+                        onChange={updatedescription}
+                    />
+                </Form.Group>
+            </div>
+            <div>
+                <Button
+                    className="me-3"
+                    variant="success"
+                    onClick={() => addQuiz()}
+                >
+                    Add Quiz
+                </Button>
             </div>
             <hr></hr>
         </div>

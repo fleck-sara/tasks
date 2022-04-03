@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Question } from "../interfaces/question";
+import { Question, QuestionType } from "../interfaces/question";
 import { Button, Form } from "react-bootstrap";
 
 type ChangeEvent = React.ChangeEvent<
@@ -15,10 +15,21 @@ export function EditQuestion({
     const [body, setbody] = useState<string>(question.body);
     const [points, setpoints] = useState<number>(question.points);
     const [name, setname] = useState<string>(question.name);
+    const [answer, setanswer] = useState<string>(question.expected);
     const [published, setpublished] = useState<boolean>(question.published);
     const [options, setoptions] = useState<string[]>(question.options);
     const [addoption, setaddoption] = useState<string>("");
     const [deleteoption, setdeleteoption] = useState<string>("");
+    //mult choice = true, open ended equals false
+    const [ismultchoice, setismultchoice] = useState<boolean>(
+        question.type === "multiple_choice_question"
+    );
+    function updateismultchoice() {
+        setismultchoice(!ismultchoice);
+    }
+    function updateanswer(event: ChangeEvent) {
+        setanswer(event.target.value);
+    }
 
     function updateBody(event: ChangeEvent) {
         setbody(event.target.value);
@@ -61,11 +72,23 @@ export function EditQuestion({
         setoptions(removeoption);
     }
     function save() {
-        question.body = body;
-        question.points = points;
-        question.name = name;
-        question.published = published;
-        question.options = options;
+        let type: QuestionType = "multiple_choice_question";
+        if (ismultchoice) {
+            type = "multiple_choice_question";
+        } else {
+            type = "short_answer_question";
+        }
+        const q: Question = {
+            id: Math.floor(Math.random() * 20),
+            name: name,
+            body: body,
+            type: type,
+            options: options,
+            expected: answer,
+            points: points,
+            published: published
+        };
+        question = q;
         changeEditing();
     }
     function cancel() {
@@ -78,21 +101,42 @@ export function EditQuestion({
             return "this question is currently unpublished";
         }
     }
-    return (
+    return ismultchoice ? (
         <div>
-            <Form.Group controlId="formEditQuestionName">
+            <Form.Group
+                controlId="formEditQuestionName"
+                data-testid="edit-name"
+            >
                 <Form.Label> Name: </Form.Label>
                 <Form.Control value={name} onChange={updatename} />
             </Form.Group>
-            <Form.Group controlId="formEditQuestionBody">
+            <Form.Group
+                controlId="formEditQuestionBody"
+                data-testid="edit-body"
+            >
                 <Form.Label>Question: </Form.Label>
                 <Form.Control value={body} onChange={updateBody} />
             </Form.Group>
             {options.map((o: string) => (
-                <div key={""}>
+                <div key={o}>
                     <span>{o}</span>
                 </div>
             ))}
+            <Form.Check
+                type="switch"
+                id="is-mult-choice-switch"
+                label="Short Answer?"
+                onChange={updateismultchoice}
+            />
+            <Form.Group
+                controlId="formEditQuestionAnswer"
+                data-testid="edit-answer"
+            >
+                <Form.Label>
+                    Question Answer (must be one of the options!):
+                </Form.Label>
+                <Form.Control value={answer} onChange={updateanswer} />
+            </Form.Group>
             <Form.Group controlId="formaddoption">
                 <Form.Label>Add Option: </Form.Label>
                 <Form.Control value={addoption} onChange={addOption} />
@@ -127,6 +171,57 @@ export function EditQuestion({
             <Button onClick={updatepublished} size="sm" className="me-4">
                 publish/unpublish
             </Button>
+            <Button
+                data-testid="save"
+                onClick={save}
+                variant="success"
+                size="sm"
+                className="me-4"
+            >
+                Save
+            </Button>
+            <Button
+                onClick={cancel}
+                variant="warning"
+                size="sm"
+                className="me-4"
+            >
+                Cancel
+            </Button>
+        </div>
+    ) : (
+        <div>
+            <Form.Group controlId="formEditQuestionName">
+                <Form.Label> Name: </Form.Label>
+                <Form.Control value={name} onChange={updatename} />
+            </Form.Group>
+            <Form.Group controlId="formEditQuestionBody">
+                <Form.Label>Question: </Form.Label>
+                <Form.Control value={body} onChange={updateBody} />
+            </Form.Group>
+            <Form.Group controlId="formEditQuestionPoints">
+                <Form.Label>Points: (Enter an Integer)</Form.Label>
+                <Form.Control value={points} onChange={updatePoints} />
+                <Form.Label>{isPublished()}</Form.Label>
+            </Form.Group>
+            <Button
+                data-testid="publish/unpublish"
+                onClick={updatepublished}
+                size="sm"
+                className="me-4"
+            >
+                publish/unpublish
+            </Button>
+            <Form.Check
+                type="switch"
+                id="is-mult-choice-switch"
+                label="Multiple Choice?"
+                onChange={updateismultchoice}
+            />
+            <Form.Group controlId="formEditQuestionAnswer">
+                <Form.Label>Question Answer:</Form.Label>
+                <Form.Control value={answer} onChange={updateanswer} />
+            </Form.Group>
             <Button onClick={save} variant="success" size="sm" className="me-4">
                 Save
             </Button>
