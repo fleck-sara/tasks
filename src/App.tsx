@@ -147,9 +147,9 @@ export function App(): JSX.Element {
                 <span>
                     Completed Features: sketch, quizzes are visible, quizzes
                     have questions (short answer and multiple choice), check
-                    correctness, can edit name, body, options, and point value
-                    of questions. Can also publish/unpublish questions. Can edit
-                    the fields of a quiz
+                    correctness, can edit questions, publish/unpublish
+                    questions. Can edit the fields of a quiz, and add new
+                    quizzes. Can add new questions. All features have tests.
                 </span>
             </div>
             <hr></hr>
